@@ -1,16 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Muli', sans-serif;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     overflow: hidden;
     margin: 0;
+}
+/* container wrapped around all panels */
+.container {
+    display: flex; /* displayed as flex row horizontally */
+    width: 90vw; /* viewport width. think of 100 vertical slices & we're taking up 90% of each */
+}
+
+.panel {
+    background-size: cover; /* cover preserves rounded corners on larger screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 50px; /* makes border rounded */
+    color: #fff;
+    cursor: pointer; /* shows cursor when hover over */
+    flex: 0.5;
+    margin: 10px; /* seperates each images w space */
+    position: relative; /* means h3 container element (panel) has to be relative */
+    -webkit-transition: all 700ms ease-in;
+}
+
+.panel h3 {
+    font-size: 24px;
+    position: absolute; /* why we made the above panel relative, cause we want this absolute */
+    bottom: 20px;
+    left: 20px; /* bottom & left position them at bottom left corner */
+    margin: 0;
+    opacity: 0; /* makes them invisible when not active */
+}
+
+.panel.active { /* if panel div also has an active class, change flex from 0.5 to 5, makes wider */
+    flex: 5;
+}
+
+.panel.active h3 { 
+    opacity: 1; /* makes so we can see panel if it's active */
+    transition: opacity 0.3sx ease-in 0.4s; /* opacity & delay when image expands */
+}
+
+@media (max-width: 480px) { /* if screen is small only show 3 of 5 cards. any styles will only take effect if screen under 480px */
+    .container {
+        width: 100vw; /* setting to 100 on small screens so takes up a little more room & gives extra space */
+    }
+
+    .panel:nth-of-type(4), /* sudo selector removes last 2 panels */
+    .panel:nth-of-type(5) {
+        display: none;
+    }
+        
 }
